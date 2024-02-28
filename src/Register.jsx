@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { CiCircleCheck } from "react-icons/ci";
+import { MdError } from "react-icons/md";
+
+import "./register.css";
+
 const USER_REGX = /^[a-zA-z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
@@ -56,27 +61,51 @@ const Register = () => {
   }, [user, pwd, matchPwd]);
 
   return (
-    <section>
+    <section className="regiser_form  flex_center">
       <h1>Register</h1>
-      <form action="">
-        <label htmlFor="username">UserName:</label>
-        <input
-          type="text"
-          id="username"
-          ref={userRef}
-          autoComplete="off"
-          required
-          //accessibility attributes
-          aria-invalid={validName ? "false" : "true"}
-          aria-describedby="uidnote"
-          //on change captures changes and sends to user -- for this will further be validated
-          onChange={(e) => setUser(e.target.value)}
-          //focus
-          onFocus={() => setUserFocus(true)}
-          onBlur={() => setUserFocus(false)}
-        />
-        <input type="email" />
-        <input type="password" />
+      <form action="" className=" flex_center">
+        <div className="username flex_center ">
+          <label htmlFor="username flex_center">
+            <p>Enter your User Name: </p>
+            <span className={validName ? "valid" : "hide"}>
+              <CiCircleCheck />
+            </span>
+            <span className={validName || !user ? "hide" : "invalid"}>
+              <MdError />
+            </span>
+          </label>
+          <input
+            type="text"
+            id="username"
+            ref={userRef}
+            autoComplete="off"
+            required
+            //accessibility attributes
+            aria-invalid={validName ? "false" : "true"}
+            aria-describedby="uidnote"
+            //on change captures changes and sends to user -- for this will further be validated
+            onChange={(e) => setUser(e.target.value)}
+            //focus
+            onFocus={() => setUserFocus(true)}
+            onBlur={() => setUserFocus(false)}
+          />
+          <span
+            id="uidnote"
+            className={
+              userFocus && user && !validName ? "instructions" : "offscreen"
+            }
+          >
+            4 to 24 characters. <br />
+            Must begin with a letter <br />
+            Letters, Numbers, Underscores, hyphens allowed
+          </span>
+        </div>
+        <div className="email">
+          <input type="email" />
+        </div>
+        <div className="password">
+          <input type="password" />
+        </div>
 
         {/* displaying error message */}
         <p
