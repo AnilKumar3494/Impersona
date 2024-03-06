@@ -1,3 +1,10 @@
+.particlejs {
+  position: relative;
+  height: 90vh;
+
+  border: 2px solid red;
+}
+
 .flex_center {
   display: flex;
   flex-direction: column;

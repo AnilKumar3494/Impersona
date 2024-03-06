@@ -1,0 +1,9 @@
+#tsparticles {
+  height: 100%;
+}
+
+.particles_container {
+  position: absolute;
+  inset: 0;
+  z-index: -100;
+}
